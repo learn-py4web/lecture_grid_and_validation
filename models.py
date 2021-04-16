@@ -28,6 +28,9 @@ db.define_table(
     Field('weight_net', 'double'),
 )
 
+# This should not appear in forms. 
+db.olives.id.readable = db.olives.id.writable = False
+
 db.olives.olive_name.label = T("Name")
 db.olives.olive_name.requires = IS_LENGTH(minsize=2)
 

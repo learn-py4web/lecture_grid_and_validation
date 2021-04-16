@@ -36,6 +36,17 @@ from py4web.utils.grid import Grid, GridClassStyleBulma
 
 url_signer = URLSigner(session)
 
+class GridEditButton(object):
+    """This is the edit button for the grid."""
+    def __init__(self):
+        self.url = URL('edit')
+        self.append_id = True # append the ID to the edit.
+        self.additional_classes = 'button'
+        self.icon = 'fa-pencil'
+        self.text = 'Edit'
+        self.message = None
+        self.onclick = None # Used for things like confirmation.
+
 @action('index', method=['POST', 'GET']) # /fixtures_example/index
 @action('index/<path:path>', method=['POST', 'GET']) # /fixtures_example/index
 @action.uses(db, auth.user, 'index.html')
@@ -47,6 +58,7 @@ def index(path=None):
         editable=False, deletable=False, details=False, create=False,
         grid_class_style=GridClassStyleBulma,
         formstyle=FormStyleBulma,
+        post_action_buttons=[GridEditButton()],
     )
     return dict(grid=grid)
 
@@ -71,7 +83,7 @@ def edit(olives_id=None):
     p = db.olives[olives_id]
     if p is None:
         redirect(URL('index'))
-    form = Form(db.product, record=p, deletable=False,
+    form = Form(db.olives, record=p, deletable=False,
                 validation=validate_form_weights,
                 csrf_session=session, formstyle=FormStyleBulma)
     if form.accepted:
