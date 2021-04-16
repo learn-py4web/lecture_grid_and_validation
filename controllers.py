@@ -43,9 +43,8 @@ def index(path=None):
     grid = Grid(
         path,
         query=db.olives.id > 0,
-        search_queries=[['Search by Name', lambda val: db.olives.olive_name.contains(val)]],
-        editable=False,
-        create=True,
+        search_queries=None, search_form=None,
+        editable=False, deletable=False, details=False, create=False,
         grid_class_style=GridClassStyleBulma,
         formstyle=FormStyleBulma,
     )

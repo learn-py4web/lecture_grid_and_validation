@@ -26,8 +26,10 @@ db.define_table(
     Field('olive_kind'),
     Field('weight_tot', 'double'),
     Field('weight_net', 'double'),
-    Field('jar_type'),
 )
+
+db.olives.olive_name.label = T("Name")
+db.olives.olive_name.requires = IS_LENGTH(minsize=2)
 
 db.olives.olive_kind.requires = IS_IN_SET({'k': 'Kalamata', 'l': 'Ligurian'})
 db.olives.olive_kind.default = 'k'
