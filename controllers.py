@@ -34,6 +34,8 @@ from .models import get_user_email
 from py4web.utils.form import Form, FormStyleBulma
 from py4web.utils.grid import Grid, GridClassStyleBulma
 
+from .models import OLIVE_KINDS
+
 url_signer = URLSigner(session)
 
 class GridEditButton(object):
@@ -60,6 +62,7 @@ def index(path=None):
         formstyle=FormStyleBulma,
         post_action_buttons=[GridEditButton()],
     )
+    grid.formatters = {'olives.olive_kind': lambda v : OLIVE_KINDS.get(v)}
     return dict(grid=grid)
 
 

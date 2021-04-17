@@ -20,6 +20,8 @@ def get_time():
 #
 ## always commit your models to avoid problems later
 
+OLIVE_KINDS = {'k': 'Kalamata', 'l': 'Ligurian'}
+
 db.define_table(
     'olives',
     Field('olive_name'),
@@ -28,13 +30,13 @@ db.define_table(
     Field('weight_net', 'double'),
 )
 
-# This should not appear in forms. 
+# This should not appear in forms.
 db.olives.id.readable = db.olives.id.writable = False
 
 db.olives.olive_name.label = T("Name")
 db.olives.olive_name.requires = IS_LENGTH(minsize=2)
 
-db.olives.olive_kind.requires = IS_IN_SET({'k': 'Kalamata', 'l': 'Ligurian'})
+db.olives.olive_kind.requires = IS_IN_SET(OLIVE_KINDS)
 db.olives.olive_kind.default = 'k'
 
 db.olives.weight_tot.label = "Weight (gross)"
