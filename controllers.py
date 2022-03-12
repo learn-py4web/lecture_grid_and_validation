@@ -51,7 +51,7 @@ class GridEditButton(object):
 
 @action('index', method=['POST', 'GET']) # /fixtures_example/index
 @action('index/<path:path>', method=['POST', 'GET']) # /fixtures_example/index
-@action.uses(db, auth.user, 'index.html')
+@action.uses('index.html', db, auth.user)
 def index(path=None):
     grid = Grid(
         path,
@@ -72,7 +72,7 @@ def validate_form_weights(form):
         form.errors['weight_tot'] = T('The gross weight should be more than the net.')
 
 @action('add', method=["GET", "POST"])
-@action.uses(db, session, auth.user, 'add.html')
+@action.uses('add.html', db, session, auth.user)
 def add():
     form = Form(db.olives, validation=validate_form_weights,
                 csrf_session=session, formstyle=FormStyleBulma)
@@ -81,7 +81,7 @@ def add():
     return dict(form=form)
 
 @action('edit/<olives_id:int>', method=["GET", "POST"])
-@action.uses(db, session, auth.user, 'edit.html')
+@action.uses('edit.html', db, session, auth.user)
 def edit(olives_id=None):
     p = db.olives[olives_id]
     if p is None:
