@@ -84,7 +84,7 @@ def add():
 @action.uses('edit.html', db, session, auth.user)
 def edit(olives_id=None):
     p = db.olives[olives_id]
-    if p is None:
+    if p is None or p.created_by != get_user_email():
         redirect(URL('index'))
     form = Form(db.olives, record=p, deletable=False,
                 validation=validate_form_weights,

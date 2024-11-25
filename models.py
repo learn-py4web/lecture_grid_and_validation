@@ -28,10 +28,12 @@ db.define_table(
     Field('olive_kind'),
     Field('weight_tot', 'double'),
     Field('weight_net', 'double'),
+    Field('created_by', default=get_user_email),
 )
 
 # This should not appear in forms.
 db.olives.id.readable = db.olives.id.writable = False
+db.olives.created_by.readable = db.olives.created_by.writable = False
 
 db.olives.olive_name.label = T("Name")
 db.olives.olive_name.requires = IS_LENGTH(minsize=2)
