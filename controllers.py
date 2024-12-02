@@ -62,7 +62,6 @@ def index(path=None):
         formstyle=FormStyleBulma,
         post_action_buttons=[GridEditButton()],
     )
-    grid.formatters = {'olives.olive_kind': lambda v : OLIVE_KINDS.get(v)}
     return dict(grid=grid)
 
 

@@ -40,6 +40,7 @@ db.olives.olive_name.requires = IS_LENGTH(minsize=2)
 
 db.olives.olive_kind.requires = IS_IN_SET(OLIVE_KINDS)
 db.olives.olive_kind.default = 'k'
+db.olives.olive_kind.represent = lambda v, r: OLIVE_KINDS.get(v)
 
 db.olives.weight_tot.label = "Weight (gross)"
 db.olives.weight_tot.requires=IS_FLOAT_IN_RANGE(
